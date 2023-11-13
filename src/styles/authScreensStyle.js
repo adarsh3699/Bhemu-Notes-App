@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 
 const login = StyleSheet.create({
 	background: {
-		// minHeight: '100%',
-		flex: 1,
+		minHeight: '100%',
+		// flex: 1,
 		backgroundColor: '#242526',
 		alignContent: 'center',
 		// justifyContent: 'center',
@@ -51,19 +51,12 @@ const login = StyleSheet.create({
 	},
 	loginBtn: {
 		width: '86%',
-		height: 40,
-		justifyContent: 'center',
 		alignSelf: 'center',
-	},
-	errorText: {
-		alignSelf: 'center',
-		marginTop: 10,
-		fontSize: 14,
 	},
 	singupBtn: {
 		// borderTopColor: 'rgba(255, 255, 255, 0.3)',
 		// borderTopWidth: 0.5,
-		// marginTop: 15,
+		marginTop: 25,
 		justifyContent: 'center',
 		alignItems: 'center',
 		alignContent: 'center',

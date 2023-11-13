@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { login } from '../styles/LoginScreenStyle';
+import { login } from '../styles/authScreensStyle';
 import { handleLoginForm } from '../firebase/auth';
 
 import { Text, View, ScrollView, KeyboardAvoidingView, Image, TextInput, TouchableOpacity } from 'react-native';
