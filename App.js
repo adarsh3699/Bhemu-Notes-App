@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, ScrollView, View } from 'react-native';
+// import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
@@ -26,13 +26,13 @@ export default function App() {
 	);
 }
 
-const styles = StyleSheet.create({
-	container: {
-		// minHeight: '100%',
-		flex: 1,
-		width: '100%',
-		backgroundColor: '#242526',
-		// alignItems: 'center',
-		// justifyContent: 'center',
-	},
-});
+// const styles = StyleSheet.create({
+// 	container: {
+// 		// minHeight: '100%',
+// 		flex: 1,
+// 		width: '100%',
+// 		backgroundColor: '#242526',
+// 		// alignItems: 'center',
+// 		// justifyContent: 'center',
+// 	},
+// });
