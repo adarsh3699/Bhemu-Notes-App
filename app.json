@@ -4,10 +4,10 @@
 		"slug": "BhemuNotes",
 		"version": "1.0.0",
 		"orientation": "portrait",
-		"icon": "./assets/logo.png",
+		"icon": "./assets/myLogoM.png",
 		"userInterfaceStyle": "dark",
 		"splash": {
-			"image": "./assets/logo.png",
+			"image": "./assets/splash.png",
 			"resizeMode": "contain",
 			"backgroundColor": "#242526"
 		},
@@ -17,12 +17,12 @@
 		},
 		"android": {
 			"adaptiveIcon": {
-				"foregroundImage": "./assets/logo.png",
+				"foregroundImage": "./assets/myLogoM.png",
 				"backgroundColor": "#242526"
 			}
 		},
 		"web": {
-			"favicon": "./assets/logo.png"
+			"favicon": "./assets/myLogoM.png"
 		}
 	}
 }

@@ -5,6 +5,8 @@ import {
 	sendEmailVerification,
 	updateProfile,
 	sendPasswordResetEmail,
+	onAuthStateChanged,
+	signOut,
 } from 'firebase/auth';
 
 import {
@@ -30,7 +32,7 @@ async function handleLoginForm(email, password, setLoading, setMessage) {
 	try {
 		await signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
-				const user = userCredential.user;
+				const use1 = userCredential.user;
 			})
 			.catch((error) => {
 				console.log(1, error);
@@ -120,4 +122,18 @@ async function handleForgetPassword(email, setLoading, setMessage) {
 		});
 }
 
-export { handleLoginForm, handleUserSignup, handleForgetPassword };
+function handleSignOut() {
+	signOut(auth)
+		.then(() => {})
+		.catch((err) => {
+			console.log(err.code);
+		});
+}
+
+function handleUserState(setUser) {
+	onAuthStateChanged(auth, (user) => {
+		setUser(user ? 'logged' : 'signIn');
+	});
+}
+
+export { handleLoginForm, handleUserSignup, handleForgetPassword, handleUserState, handleSignOut };

@@ -13,8 +13,8 @@ const login = StyleSheet.create({
 		// flex: 1,
 	},
 	brandLogo: {
-		width: 200,
 		height: 130,
+		aspectRatio: 1,
 		alignSelf: 'center',
 		marginTop: 50,
 		// backgroundColor: 'white',

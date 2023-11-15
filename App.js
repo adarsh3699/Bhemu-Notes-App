@@ -1,15 +1,19 @@
-import React from 'react';
-// import { StyleSheet, Text, ScrollView, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, Image } from 'react-native';
+
+import { handleUserState } from './src/firebase/auth';
+
+import AuthStack from './src/navigation/AuthStack';
+import HomeStack from './src/navigation/HomeStack';
+
 import { StatusBar } from 'expo-status-bar';
 import { PaperProvider, DefaultTheme } from 'react-native-paper';
 import { NavigationContainer, colorScheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-import LoginScreen from './src/screens/LoginScreen';
-import SignupScreen from './src/screens/SignupScreen';
-import ForgottenScreen from './src/screens/ForgottenScreen';
+import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
+
 const theme = {
 	...DefaultTheme,
 	colors: {
@@ -36,27 +40,31 @@ const navigationTheme = {
 };
 
 export default function App() {
+	const [user, setUser] = useState('loading');
+
+	useEffect(() => {
+		handleUserState(setUser);
+	}, []);
 	return (
 		<NavigationContainer theme={navigationTheme}>
 			<PaperProvider theme={theme}>
 				<StatusBar style="light" />
-				<Stack.Navigator>
-					<Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-					<Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: false }} />
-					<Stack.Screen name="ForgottenPass" component={ForgottenScreen} options={{ headerShown: false }} />
-				</Stack.Navigator>
+				{user === 'loading' ? (
+					<View style={{ flex: 1, backgroundColor: '#242526', justifyContent: 'center' }}>
+						<Image
+							source={require('./assets/myLogoM.png')}
+							style={{ height: 100, aspectRatio: 1, alignSelf: 'center' }}
+						/>
+					</View>
+				) : user === 'logged' ? (
+					<HomeStack />
+				) : (
+					<AuthStack />
+				)}
+
+				{/* <AuthStack /> */}
+				{/* <HomeStack /> */}
 			</PaperProvider>
 		</NavigationContainer>
 	);
 }
-
-// const styles = StyleSheet.create({
-// 	container: {
-// 		// minHeight: '100%',
-// 		flex: 1,
-// 		width: '100%',
-// 		backgroundColor: '#242526',
-// 		// alignItems: 'center',
-// 		// justifyContent: 'center',
-// 	},
-// });
