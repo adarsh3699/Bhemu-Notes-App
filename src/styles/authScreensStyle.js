@@ -2,23 +2,21 @@ import { StyleSheet } from 'react-native';
 
 const login = StyleSheet.create({
 	background: {
-		minHeight: '100%',
-		// flex: 1,
-		backgroundColor: '#242526',
+		flex: 1,
 		alignContent: 'center',
-		// justifyContent: 'center',
+		justifyContent: 'flex-end',
 		width: '100%',
 	},
 	wrapper: {
 		// backgroundColor: 'red',
-		minHeight: 750,
-		justifyContent: 'center',
+		// minHeight: 750,
+		// flex: 1,
 	},
 	brandLogo: {
 		width: 200,
 		height: 130,
 		alignSelf: 'center',
-		// marginTop: 120,
+		marginTop: 50,
 		// backgroundColor: 'white',
 	},
 	title: {
@@ -39,7 +37,7 @@ const login = StyleSheet.create({
 		paddingHorizontal: 10,
 		fontSize: 16,
 
-		// elevation: 10,
+		// elevation: 20,
 		// shadowColor: '#f1f1f1',
 	},
 	showPassword: {
@@ -53,15 +51,10 @@ const login = StyleSheet.create({
 		width: '86%',
 		alignSelf: 'center',
 	},
-	singupBtn: {
-		// borderTopColor: 'rgba(255, 255, 255, 0.3)',
-		// borderTopWidth: 0.5,
-		marginTop: 25,
-		justifyContent: 'center',
-		alignItems: 'center',
-		alignContent: 'center',
-		width: '100%',
-		// backgroundColor: 'blue',
+	message: {
+		alignSelf: 'center',
+		fontSize: 15,
+		// backgroundColor: 'red',
 	},
 	forgotPass: {
 		alignSelf: 'center',
@@ -69,14 +62,24 @@ const login = StyleSheet.create({
 		padding: 5,
 		// backgroundColor: 'red',
 	},
+	singupBtn: {
+		borderTopColor: 'rgba(255, 255, 255, 0.3)',
+		borderTopWidth: 0.5,
+		marginTop: 120,
+		paddingVertical: 15,
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignContent: 'center',
+		width: '100%',
+		// backgroundColor: 'blue',
+	},
 });
 
-const forgotPass = StyleSheet.create({
+const signup = StyleSheet.create({
 	background: {
 		flex: 1,
-		backgroundColor: '#242526',
 		alignContent: 'center',
-		// justifyContent: 'center',
+		justifyContent: 'center',
 		width: '100%',
 	},
 	title: {
@@ -85,7 +88,24 @@ const forgotPass = StyleSheet.create({
 		color: 'white',
 		textAlign: 'center',
 		marginBottom: 20,
-		marginTop: 220,
+		marginTop: 100,
+	},
+});
+
+const forgotPass = StyleSheet.create({
+	background: {
+		flex: 1,
+		alignContent: 'center',
+		justifyContent: 'center',
+		width: '100%',
+	},
+	title: {
+		fontSize: 23,
+		fontWeight: 'bold',
+		color: 'white',
+		textAlign: 'center',
+		marginBottom: 20,
+		marginTop: 100,
 	},
 	aboutText: {
 		color: 'white',
@@ -97,23 +117,6 @@ const forgotPass = StyleSheet.create({
 		marginTop: 20,
 		padding: 5,
 		// backgroundColor: 'red',
-	},
-});
-
-const signup = StyleSheet.create({
-	background: {
-		flex: 1,
-		backgroundColor: '#242526',
-		alignContent: 'center',
-		width: '100%',
-	},
-	title: {
-		fontSize: 23,
-		fontWeight: 'bold',
-		color: 'white',
-		textAlign: 'center',
-		marginBottom: 20,
-		marginTop: 220,
 	},
 });
 

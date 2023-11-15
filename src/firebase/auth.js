@@ -18,11 +18,11 @@ import {
 
 const database = getFirestore();
 
-async function handleLoginForm(email, password, setLoading, setErrorMsg) {
+async function handleLoginForm(email, password, setLoading, setMessage) {
 	setLoading(true);
 
 	if (!email || !password) {
-		setErrorMsg('Please enter your email and password');
+		setMessage('Please enter your email and password');
 		setLoading(false);
 		return;
 	}
@@ -33,22 +33,22 @@ async function handleLoginForm(email, password, setLoading, setErrorMsg) {
 				const user = userCredential.user;
 			})
 			.catch((error) => {
-				// console.log(error);
-				setErrorMsg(error.code);
+				console.log(1, error);
+				setMessage(error.code);
 			});
 	} catch (error) {
-		console.log(1, error);
+		console.log(2, error);
 	} finally {
 		setLoading(false);
 	}
 }
 
-async function handleUserSignup(fullName, email, password, confirmPassword, setLoading, setErrorMsg) {
+async function handleUserSignup(fullName, email, password, confirmPassword, setLoading, setMessage) {
 	if (!fullName || !email || !password || !confirmPassword) {
-		setErrorMsg('Please enter your all details');
+		setMessage('Please enter your all details');
 		return;
 	} else if (password !== confirmPassword) {
-		setErrorMsg('Password does not match');
+		setMessage('Password does not match');
 		return;
 	}
 
@@ -59,7 +59,7 @@ async function handleUserSignup(fullName, email, password, confirmPassword, setL
 		await createUserWithEmailAndPassword(auth, email, password)
 			.then((cred) => {
 				sendEmailVerification(cred.user).then(() => {
-					// setErrorMsg('Email verification sent. Please also check in spam');
+					// setMessage('Email verification sent. Please also check in spam');
 				});
 				updateProfile(cred.user, { displayName: fullName })
 					.then(() => {
@@ -70,7 +70,7 @@ async function handleUserSignup(fullName, email, password, confirmPassword, setL
 							lastloginedOn: serverTimestamp(),
 						})
 							.then(() => {
-								setErrorMsg('Signup successful. Please login now');
+								setMessage('Signup successful. Please login now');
 								// localStorage.setItem(
 								// 	'user_details',
 								// 	JSON.stringify({
@@ -82,17 +82,17 @@ async function handleUserSignup(fullName, email, password, confirmPassword, setL
 								// document.location.href = '/home';
 							})
 							.catch((err) => {
-								setErrorMsg(err.code);
+								setMessage(err.code);
 								console.log(1, err.code);
 							});
 					})
 					.catch((err) => {
-						setErrorMsg(err.code);
+						setMessage(err.code);
 						console.log(2, err.code);
 					});
 			})
 			.catch((error) => {
-				setErrorMsg(error.code);
+				setMessage(error.code);
 				console.log(3, error);
 			});
 	} catch (error) {
@@ -103,7 +103,6 @@ async function handleUserSignup(fullName, email, password, confirmPassword, setL
 }
 
 async function handleForgetPassword(email, setLoading, setMessage) {
-	console.log(email);
 	if (!email) {
 		setMessage('Please enter your email');
 		return;

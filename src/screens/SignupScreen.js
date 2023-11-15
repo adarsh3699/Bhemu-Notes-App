@@ -4,9 +4,7 @@ import { handleUserSignup } from '../firebase/auth';
 
 import { Text, View, ScrollView, KeyboardAvoidingView, Image, TextInput, TouchableOpacity } from 'react-native';
 
-import Checkbox from 'expo-checkbox';
 import { Button, HelperText } from 'react-native-paper';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 function LoginScreen({ navigation }) {
 	const [fullName, setFullName] = useState('');
@@ -14,7 +12,7 @@ function LoginScreen({ navigation }) {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [errorMsg, setErrorMsg] = useState('');
+	const [message, setMessage] = useState('');
 
 	const handleSignupBtn = useCallback(async () => {
 		handleUserSignup(
@@ -23,9 +21,9 @@ function LoginScreen({ navigation }) {
 			password.trim(),
 			confirmPassword.trim(),
 			setLoading,
-			setErrorMsg
+			setMessage
 		);
-	}, [fullName, email, password, confirmPassword, setLoading, setErrorMsg]);
+	}, [fullName, email, password, confirmPassword, setLoading, setMessage]);
 
 	return (
 		<KeyboardAvoidingView style={signup.background} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -40,7 +38,7 @@ function LoginScreen({ navigation }) {
 						autoCorrect={false}
 						inputMode="text"
 						value={fullName}
-						onChangeText={(text) => setFullName(text) & (errorMsg ? setErrorMsg('') : null)}
+						onChangeText={(text) => setFullName(text) & (message ? setMessage('') : null)}
 					/>
 					<TextInput
 						style={login.textInput}
@@ -49,7 +47,7 @@ function LoginScreen({ navigation }) {
 						autoComplete="email"
 						inputMode="email"
 						value={email}
-						onChangeText={(text) => setEmail(text) & (errorMsg ? setErrorMsg('') : null)}
+						onChangeText={(text) => setEmail(text) & (message ? setMessage('') : null)}
 					/>
 
 					<TextInput
@@ -59,7 +57,7 @@ function LoginScreen({ navigation }) {
 						autoCapitalize="none"
 						autoComplete="new-password"
 						value={password}
-						onChangeText={(text) => setPassword(text) & (errorMsg ? setErrorMsg('') : null)}
+						onChangeText={(text) => setPassword(text) & (message ? setMessage('') : null)}
 					/>
 					<TextInput
 						style={login.textInput}
@@ -68,7 +66,7 @@ function LoginScreen({ navigation }) {
 						autoCapitalize="none"
 						autoComplete="new-password"
 						value={confirmPassword}
-						onChangeText={(text) => setConfirmPassword(text) & (errorMsg ? setErrorMsg('') : null)}
+						onChangeText={(text) => setConfirmPassword(text) & (errorMsg ? setMessage('') : null)}
 					/>
 
 					<Button
@@ -84,8 +82,8 @@ function LoginScreen({ navigation }) {
 					>
 						{!loading ? 'Signup' : null}
 					</Button>
-					<HelperText type="error" visible={!!errorMsg} style={login.errorText}>
-						{errorMsg}
+					<HelperText type="error" visible={!!message} style={login.message}>
+						{message}
 					</HelperText>
 
 					<TouchableOpacity style={forgotPass.backToLoginPage} onPress={() => navigation.navigate('Login')}>

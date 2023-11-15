@@ -1,8 +1,8 @@
 import React from 'react';
 // import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { PaperProvider } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native';
+import { PaperProvider, DefaultTheme } from 'react-native-paper';
+import { NavigationContainer, colorScheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import LoginScreen from './src/screens/LoginScreen';
@@ -10,11 +10,35 @@ import SignupScreen from './src/screens/SignupScreen';
 import ForgottenScreen from './src/screens/ForgottenScreen';
 
 const Stack = createNativeStackNavigator();
+const theme = {
+	...DefaultTheme,
+	colors: {
+		...DefaultTheme.colors,
+		primary: '#f0853d',
+		accent: '#f1c40f',
+		surfaceDisabled: '#bd6931',
+		background: '#242526',
+		text: 'white',
+		outline: 'white',
+	},
+};
+
+const navigationTheme = {
+	dark: colorScheme === 'dark',
+	colors: {
+		// border: theme.colors.background,
+		background: theme.colors.background,
+		// card: null,
+		// notification: theme.colors.outline,
+		primary: theme.colors.primary,
+		text: theme.colors.outline,
+	},
+};
 
 export default function App() {
 	return (
-		<NavigationContainer>
-			<PaperProvider>
+		<NavigationContainer theme={navigationTheme}>
+			<PaperProvider theme={theme}>
 				<StatusBar style="light" />
 				<Stack.Navigator>
 					<Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />

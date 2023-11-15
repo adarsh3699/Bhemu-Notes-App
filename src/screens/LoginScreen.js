@@ -4,7 +4,6 @@ import { handleLoginForm } from '../firebase/auth';
 
 import { Text, View, ScrollView, KeyboardAvoidingView, Image, TextInput, TouchableOpacity } from 'react-native';
 
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Checkbox from 'expo-checkbox';
 import { Button, HelperText } from 'react-native-paper';
 
@@ -13,75 +12,76 @@ function LoginScreen({ navigation }) {
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [ispasswordVisible, setIspasswordVisible] = useState(false);
-	const [errorMsg, setErrorMsg] = useState();
+	const [message, setMessage] = useState('');
 
 	const handleLogin = useCallback(() => {
-		handleLoginForm(email.trim(), password.trim(), setLoading, setErrorMsg);
+		handleLoginForm(email.trim(), password.trim(), setLoading, setMessage);
 	}, [email, password]);
 
 	return (
-		<KeyboardAwareScrollView contentContainerStyle={login.background}>
-			<View style={login.wrapper}>
-				<Image source={require('../../assets/logo.png')} style={login.brandLogo} />
-				<Text style={login.title}>Bhemu Notes</Text>
-				<TextInput
-					style={login.textInput}
-					placeholder="Email"
-					keyboardType="email-address"
-					autoComplete="email"
-					autoCapitalize="none"
-					value={email}
-					onChangeText={(text) => {
-						setEmail(text) & (errorMsg ? setErrorMsg('') : null);
-					}}
-				/>
-				<TextInput
-					style={login.textInput}
-					placeholder="Password"
-					secureTextEntry={!ispasswordVisible}
-					autoCapitalize="none"
-					autoComplete="current-password"
-					value={password}
-					onChangeText={(text) => setPassword(text) & (errorMsg ? setErrorMsg('') : null)}
-				/>
-				<View style={login.showPassword} onTouchStart={() => setIspasswordVisible(!ispasswordVisible)}>
-					<Checkbox value={ispasswordVisible} />
-					<Text style={{ color: 'white', marginLeft: 10 }}>Show Password</Text>
-				</View>
+		<KeyboardAvoidingView style={login.background} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+			<View>
+				<ScrollView contentContainerStyle={login.wrapper} keyboardShouldPersistTaps="always">
+					<Image source={require('../../assets/logo.png')} style={login.brandLogo} />
+					<Text style={login.title}>Bhemu Notes</Text>
+					<TextInput
+						style={login.textInput}
+						placeholder="Email"
+						keyboardType="email-address"
+						autoComplete="email"
+						autoCapitalize="none"
+						value={email}
+						onChangeText={(text) => {
+							setEmail(text) & (message ? setMessage('') : null);
+						}}
+						returnKeyType="next"
+						inputMode="email"
+					/>
+					<TextInput
+						style={login.textInput}
+						placeholder="Password"
+						secureTextEntry={!ispasswordVisible}
+						autoCapitalize="none"
+						contextMenuHidden={true}
+						autoComplete="current-password"
+						keyboardType={ispasswordVisible ? 'visible-password' : null}
+						value={password}
+						onChangeText={(text) => setPassword(text) & (message ? setMessage('') : null)}
+					/>
+					<View style={login.showPassword} onTouchStart={() => setIspasswordVisible(!ispasswordVisible)}>
+						<Checkbox value={ispasswordVisible} />
+						<Text style={{ color: 'white', marginLeft: 10 }}>Show Password</Text>
+					</View>
 
-				<Button
-					mode="contained"
-					loading={loading}
-					uppercase
-					buttonColor="#f0853d"
-					style={login.loginBtn}
-					onPress={handleLogin}
-					disabled={loading}
-					rippleColor="#e8b999"
-					theme={{ colors: { surfaceDisabled: '#bd6931' } }}
-				>
-					{!loading ? 'Login' : null}
-				</Button>
-
-				<HelperText type="error" visible={!!errorMsg} style={login.errorText}>
-					{errorMsg}
-				</HelperText>
-
-				<View style={login.singupBtn}>
-					<Text
-						style={{ color: 'hsla(0,0%,100%,.6)', padding: 5 }}
-						onPress={() => navigation.navigate('Signup')}
+					<Button
+						mode="contained"
+						loading={loading}
+						uppercase
+						style={login.loginBtn}
+						onPress={handleLogin}
+						disabled={loading}
 					>
-						Don't have an account yet? <Text style={{ color: 'white' }}>Signup</Text>
-					</Text>
-				</View>
-				<TouchableOpacity style={login.forgotPass}>
-					<Text onPress={() => navigation.navigate('ForgottenPass')} style={{ color: 'white' }}>
-						Forgot Password
-					</Text>
-				</TouchableOpacity>
+						{!loading ? 'Login' : null}
+					</Button>
+
+					<HelperText type="error" visible={!!message} style={login.message}>
+						{message}
+					</HelperText>
+					<TouchableOpacity style={login.forgotPass} onPress={() => navigation.navigate('ForgottenPass')}>
+						<Text style={{ color: 'white' }}>Forgot Password</Text>
+					</TouchableOpacity>
+
+					<View style={login.singupBtn}>
+						<Text
+							style={{ color: 'hsla(0,0%,100%,.6)', padding: 5 }}
+							onPress={() => navigation.navigate('Signup')}
+						>
+							Don't have an account yet? <Text style={{ color: 'white' }}>Signup</Text>
+						</Text>
+					</View>
+				</ScrollView>
 			</View>
-		</KeyboardAwareScrollView>
+		</KeyboardAvoidingView>
 	);
 }
 
