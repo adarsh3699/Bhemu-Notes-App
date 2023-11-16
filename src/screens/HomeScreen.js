@@ -1,11 +1,14 @@
 import React from 'react';
 import { handleSignOut } from '../firebase/auth';
 
+import NavBar from '../components/homeScreen/navBar/NavBar';
+
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const HomeScreen = ({ navigation }) => {
 	return (
-		<View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+		<View>
+			<NavBar />
 			<Text>Home Screen</Text>
 
 			<TouchableOpacity onPress={() => navigation.navigate('Settings')}>

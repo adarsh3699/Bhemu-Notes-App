@@ -10,7 +10,7 @@ import { StatusBar } from 'expo-status-bar';
 import { PaperProvider, DefaultTheme } from 'react-native-paper';
 import { NavigationContainer, colorScheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 const Stack = createNativeStackNavigator();
 
@@ -47,7 +47,12 @@ export default function App() {
 	}, []);
 	return (
 		<NavigationContainer theme={navigationTheme}>
-			<PaperProvider theme={theme}>
+			<PaperProvider
+				theme={theme}
+				// settings={{
+				// 	icon: (props) => <AwesomeIcon {...props} />,
+				// }}
+			>
 				<StatusBar style="light" />
 				{user === 'loading' ? (
 					<View style={{ flex: 1, backgroundColor: '#242526', justifyContent: 'center' }}>

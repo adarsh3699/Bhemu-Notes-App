@@ -17,12 +17,18 @@
 		},
 		"android": {
 			"adaptiveIcon": {
-				"foregroundImage": "./assets/myLogoM.png",
+				"foregroundImage": "./assets/myLogoS.png",
 				"backgroundColor": "#242526"
-			}
+			},
+			"package": "com.adarsh3699.BhemuNotes"
 		},
 		"web": {
 			"favicon": "./assets/myLogoM.png"
+		},
+		"extra": {
+			"eas": {
+				"projectId": "c6d03308-2507-4806-a8b5-e7f1930eb2c6"
+			}
 		}
 	}
 }
