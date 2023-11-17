@@ -123,11 +123,11 @@ async function handleForgetPassword(email, setLoading, setMessage) {
 }
 
 function handleSignOut() {
-	signOut(auth)
-		.then(() => {})
-		.catch((err) => {
-			console.log(err.code);
-		});
+	// signOut(auth)
+	// 	.then(() => {})
+	// 	.catch((err) => {
+	// 		console.log(err.code);
+	// 	});
 }
 
 function handleUserState(setUser) {

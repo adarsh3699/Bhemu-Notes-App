@@ -7,7 +7,7 @@ import { Appbar, Avatar, IconButton, Button } from 'react-native-paper';
 
 function NavBar() {
 	return (
-		<Appbar.Header style={NavBarStyle.NavBar}>
+		<Appbar style={NavBarStyle.NavBar}>
 			<View style={NavBarStyle.brandSection}>
 				<Avatar.Image
 					size={33}
@@ -27,7 +27,7 @@ function NavBar() {
 			>
 				Add Notes
 			</Button>
-		</Appbar.Header>
+		</Appbar>
 	);
 }
 
