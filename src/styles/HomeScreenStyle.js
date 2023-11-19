@@ -9,8 +9,11 @@ const HomeScreenStyle = StyleSheet.create({
 		backgroundColor: '#242526',
 	},
 	textInputBox: {
-		backgroundColor: '#1e1e1e',
-		shadowColor: 'rgb(0,0,0)',
+		// backgroundColor: '#1e1e1e',
+		backgroundColor: '#151515',
+		shadowColor: 'black',
+		shadowOpacity: 100,
+		shadowOffset: { width: 0, height: 0 },
 		elevation: 10,
 	},
 	textInput: {
@@ -20,17 +23,6 @@ const HomeScreenStyle = StyleSheet.create({
 		marginVertical: 10,
 		borderRadius: 5,
 		paddingHorizontal: 7,
-
-		// minWidth: '86%',
-		// maxWidth: '86%',
-		// backgroundColor: 'rgba(255, 255, 255, 0.8)',
-		// alignSelf: 'center',
-		// borderRadius: 9,
-		// marginBottom: 20,
-		// paddingHorizontal: 10,
-		// fontSize: 16,
-		// elevation: 20,
-		// shadowColor: '#f1f1f1',
 	},
 	showPassword: {
 		flexDirection: 'row',

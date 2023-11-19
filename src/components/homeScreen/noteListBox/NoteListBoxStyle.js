@@ -1,69 +1,49 @@
 import { StyleSheet } from 'react-native';
 
 const NoteListBoxStyle = StyleSheet.create({
-	background: {
+	noteBox: {
 		// flex: 1,
 		alignContent: 'center',
-		justifyContent: 'flex-end',
-		width: '100%',
-		backgroundColor: '#242526',
+		// justifyContent: 'flex-end',
+		alignSelf: 'center',
+		borderRadius: 15,
+		paddingVertical: 10,
+		paddingHorizontal: 15,
+		marginVertical: 5,
+		width: '95%',
+		backgroundColor: '#dc5f73',
 	},
-	textInputBox: {
-		backgroundColor: '#1e1e1e',
-		shadowColor: 'rgb(0,0,0)',
-		elevation: 10,
+	noteTitle: {
+		fontSize: 16.5,
+		fontWeight: '500',
+		marginBottom: 3.5,
+		overflow: 'hidden',
+		color: 'white',
 	},
-	textInput: {
-		backgroundColor: 'bisque',
-		height: 32,
-		marginHorizontal: 10,
-		marginVertical: 10,
-		borderRadius: 5,
-		paddingHorizontal: 7,
-
-		// minWidth: '86%',
-		// maxWidth: '86%',
-		// backgroundColor: 'rgba(255, 255, 255, 0.8)',
-		// alignSelf: 'center',
-		// borderRadius: 9,
-		// marginBottom: 20,
-		// paddingHorizontal: 10,
-		// fontSize: 16,
-		// elevation: 20,
-		// shadowColor: '#f1f1f1',
+	noteContent: {
+		marginBottom: 5,
+		overflow: 'hidden',
+		height: 38,
 	},
-	showPassword: {
+	noteContentText: {
+		// display: 'list-item',
+		fontSize: 14,
+		fontWeight: '400',
+		color: 'white',
+	},
+	noteDate: {
 		flexDirection: 'row',
-		marginBottom: 20,
-		alignSelf: 'flex-start',
-		marginLeft: '7%',
-		// backgroundColor: 'red',
+		justifyContent: 'space-between',
 	},
-	loginBtn: {
-		width: '86%',
-		alignSelf: 'center',
+	noteDateText: {
+		fontSize: 12,
+		fontWeight: '400',
+		color: 'white',
 	},
-	message: {
-		alignSelf: 'center',
-		fontSize: 15,
-		// backgroundColor: 'red',
-	},
-	forgotPass: {
-		alignSelf: 'center',
-		marginTop: 15,
-		padding: 5,
-		// backgroundColor: 'red',
-	},
-	singupBtn: {
-		borderTopColor: 'rgba(255, 255, 255, 0.3)',
-		borderTopWidth: 0.5,
-		marginTop: 120,
-		paddingVertical: 15,
-		justifyContent: 'center',
-		alignItems: 'center',
-		alignContent: 'center',
-		width: '100%',
-		// backgroundColor: 'blue',
+	noteTimeText: {
+		fontSize: 12,
+		fontWeight: '400',
+		color: 'white',
 	},
 });
 

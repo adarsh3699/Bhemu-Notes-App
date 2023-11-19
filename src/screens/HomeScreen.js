@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const HomeScreen = ({ navigation }) => {
 	return (
-		<SafeAreaView style={{ backgroundColor: '#1e1e1e' }}>
+		<SafeAreaView style={{ backgroundColor: '#151515' }}>
 			<ScrollView
 				contentContainerStyle={HomeScreenStyle.background}
 				stickyHeaderIndices={[1]}

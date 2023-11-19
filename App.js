@@ -21,7 +21,7 @@ const theme = {
 		primary: '#f0853d',
 		accent: '#f1c40f',
 		surfaceDisabled: '#bd6931',
-		background: '#242526',
+		background: '#1e1e1e',
 		text: 'white',
 		outline: 'white',
 	},
