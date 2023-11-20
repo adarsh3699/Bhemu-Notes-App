@@ -4,7 +4,7 @@
 		"slug": "BhemuNotes",
 		"version": "1.0.0",
 		"orientation": "portrait",
-		"icon": "./assets/app_icon.png",
+		"icon": "./assets/app_icon_2.png",
 		"userInterfaceStyle": "dark",
 		"splash": {
 			"image": "./assets/splash.png",
@@ -17,7 +17,7 @@
 		},
 		"android": {
 			"adaptiveIcon": {
-				"foregroundImage": "./assets/app_icon.png",
+				"foregroundImage": "./assets/app_icon_2.png",
 				"backgroundColor": "#FFFFFF"
 			},
 			"package": "com.adarsh3699.BhemuNotes"
