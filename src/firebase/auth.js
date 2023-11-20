@@ -1,4 +1,6 @@
-import { auth } from './firebaseConfig';
+import { auth, database } from './firebaseConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
@@ -10,15 +12,12 @@ import {
 } from 'firebase/auth';
 
 import {
-	getFirestore,
 	getDoc,
 	setDoc,
 	// updateDoc,
 	doc,
 	serverTimestamp,
 } from 'firebase/firestore';
-
-const database = getFirestore();
 
 async function handleLoginForm(email, password, setLoading, setMessage) {
 	setLoading(true);
@@ -31,8 +30,16 @@ async function handleLoginForm(email, password, setLoading, setMessage) {
 
 	try {
 		await signInWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
-				const use1 = userCredential.user;
+			.then(async (cred) => {
+				await AsyncStorage.setItem('user_profile_img', cred?.user?.photoURL);
+				await AsyncStorage.setItem(
+					'user_details',
+					JSON.stringify({
+						userName: cred?.user?.displayName,
+						email,
+						userId: cred?.user?.uid,
+					})
+				);
 			})
 			.catch((error) => {
 				console.log(1, error);
@@ -71,17 +78,16 @@ async function handleUserSignup(fullName, email, password, confirmPassword, setL
 							createdOn: serverTimestamp(),
 							lastloginedOn: serverTimestamp(),
 						})
-							.then(() => {
+							.then(async () => {
 								setMessage('Signup successful. Please login now');
-								// localStorage.setItem(
-								// 	'user_details',
-								// 	JSON.stringify({
-								// 		fullName,
-								// 		email,
-								// 		userId: cred?.user?.uid,
-								// 	})
-								// );
-								// document.location.href = '/home';
+								await AsyncStorage.setItem(
+									'user_details',
+									JSON.stringify({
+										fullName,
+										email,
+										userId: cred?.user?.uid,
+									})
+								);
 							})
 							.catch((err) => {
 								setMessage(err.code);
@@ -122,9 +128,9 @@ async function handleForgetPassword(email, setLoading, setMessage) {
 		});
 }
 
-function handleSignOut() {
+async function handleSignOut() {
 	// signOut(auth)
-	// 	.then(() => {})
+	// 	.then(() => {AsyncStorage.clear()})
 	// 	.catch((err) => {
 	// 		console.log(err.code);
 	// 	});

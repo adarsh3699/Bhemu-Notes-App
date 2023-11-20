@@ -66,7 +66,7 @@ function LoginScreen({ navigation }) {
 						autoCapitalize="none"
 						autoComplete="new-password"
 						value={confirmPassword}
-						onChangeText={(text) => setConfirmPassword(text) & (errorMsg ? setMessage('') : null)}
+						onChangeText={(text) => setConfirmPassword(text) & (message ? setMessage('') : null)}
 					/>
 
 					<Button

@@ -2,9 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const NoteListBoxStyle = StyleSheet.create({
 	noteBox: {
-		// flex: 1,
 		alignContent: 'center',
-		// justifyContent: 'flex-end',
 		alignSelf: 'center',
 		borderRadius: 15,
 		paddingVertical: 10,
@@ -26,10 +24,10 @@ const NoteListBoxStyle = StyleSheet.create({
 		height: 38,
 	},
 	noteContentText: {
-		// display: 'list-item',
 		fontSize: 14,
 		fontWeight: '400',
 		color: 'white',
+		whiteSpace: 'pre-wrap',
 	},
 	noteDate: {
 		flexDirection: 'row',
@@ -37,12 +35,12 @@ const NoteListBoxStyle = StyleSheet.create({
 	},
 	noteDateText: {
 		fontSize: 12,
-		fontWeight: '400',
+		fontWeight: '500',
 		color: 'white',
 	},
 	noteTimeText: {
 		fontSize: 12,
-		fontWeight: '400',
+		fontWeight: '500',
 		color: 'white',
 	},
 });
