@@ -21,12 +21,13 @@ import {
 // collection ref
 const colRef = collection(database, 'user_notes');
 
-let userId;
-AsyncStorage.getItem('user_details', (err, result) => {
-	userId = JSON.parse(result)?.userId;
-});
-
 function getUserAllNoteData(setAllNotes, setIsFetchNotLoading, setMsg) {
+	let userId = auth?.currentUser?.uid;
+	if (!userId) {
+		console.log('getUserAllNoteData:- Please Provide userId');
+		return setMsg('Please Provide all details');
+	}
+
 	const getDataQuery = query(colRef, where('userId', '==', userId), orderBy('updatedOn', 'desc')); // orderBy('name', 'desc || ase')
 	setIsFetchNotLoading(true);
 	onSnapshot(

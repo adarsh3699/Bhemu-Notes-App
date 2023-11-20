@@ -129,11 +129,13 @@ async function handleForgetPassword(email, setLoading, setMessage) {
 }
 
 async function handleSignOut() {
-	// signOut(auth)
-	// 	.then(() => {AsyncStorage.clear()})
-	// 	.catch((err) => {
-	// 		console.log(err.code);
-	// 	});
+	signOut(auth)
+		.then(() => {
+			AsyncStorage.clear();
+		})
+		.catch((err) => {
+			console.log(err.code);
+		});
 }
 
 function handleUserState(setUser) {

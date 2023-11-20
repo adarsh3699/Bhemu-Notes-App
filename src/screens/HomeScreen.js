@@ -82,6 +82,13 @@ const HomeScreen = ({ navigation }) => {
 						/>
 					);
 				})}
+
+				<TouchableOpacity onPress={handleSignOut}>
+					<Text>Logout</Text>
+				</TouchableOpacity>
+				<TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+					<Text>Back To SettingScreen</Text>
+				</TouchableOpacity>
 			</ScrollView>
 		</SafeAreaView>
 	);
