@@ -73,6 +73,11 @@ function addNewNote(upcomingData, setMyNotesId, setMsg, setIsApiLoading) {
 	const stringifyedNoteData = JSON.stringify(newNoteData);
 	const encryptNoteData = encryptText(stringifyedNoteData);
 
+	if (!userId) {
+		setMsg('Please Provide all details');
+		return console.log('addNewNote:- Please Provide all details');
+	}
+
 	addDoc(colRef, {
 		userId,
 		notesTitle: encryptTitle,
