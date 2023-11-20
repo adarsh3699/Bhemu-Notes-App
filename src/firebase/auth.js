@@ -30,16 +30,16 @@ async function handleLoginForm(email, password, setLoading, setMessage) {
 
 	try {
 		await signInWithEmailAndPassword(auth, email, password)
-			.then(async (cred) => {
-				await AsyncStorage.setItem('user_profile_img', cred?.user?.photoURL);
-				await AsyncStorage.setItem(
-					'user_details',
-					JSON.stringify({
-						userName: cred?.user?.displayName,
-						email,
-						userId: cred?.user?.uid,
-					})
-				);
+			.then((cred) => {
+				// await AsyncStorage.setItem('user_profile_img', cred?.user?.photoURL);
+				// await AsyncStorage.setItem(
+				// 	'user_details',
+				// 	JSON.stringify({
+				// 		userName: cred?.user?.displayName,
+				// 		email,
+				// 		userId: cred?.user?.uid,
+				// 	})
+				// );
 			})
 			.catch((error) => {
 				console.log(1, error);
@@ -129,11 +129,13 @@ async function handleForgetPassword(email, setLoading, setMessage) {
 }
 
 async function handleSignOut() {
-	// signOut(auth)
-	// 	.then(() => {AsyncStorage.clear()})
-	// 	.catch((err) => {
-	// 		console.log(err.code);
-	// 	});
+	signOut(auth)
+		.then(() => {
+			AsyncStorage.clear();
+		})
+		.catch((err) => {
+			console.log(err.code);
+		});
 }
 
 function handleUserState(setUser) {
