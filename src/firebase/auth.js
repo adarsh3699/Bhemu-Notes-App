@@ -42,11 +42,11 @@ async function handleLoginForm(email, password, setLoading, setMessage) {
 				);
 			})
 			.catch((error) => {
-				console.log(1, error);
-				setMessage(error.code);
+				console.log('handleLoginForm_1', error);
+				setMessage(error.mass);
 			});
 	} catch (error) {
-		console.log(2, error);
+		console.log('handleLoginForm_2', error);
 	} finally {
 		setLoading(false);
 	}
@@ -91,20 +91,20 @@ async function handleUserSignup(fullName, email, password, confirmPassword, setL
 							})
 							.catch((err) => {
 								setMessage(err.code);
-								console.log(1, err.code);
+								console.log('handleUserSignup_1', err.code);
 							});
 					})
 					.catch((err) => {
 						setMessage(err.code);
-						console.log(2, err.code);
+						console.log('handleUserSignup_2', err.code);
 					});
 			})
 			.catch((error) => {
 				setMessage(error.code);
-				console.log(3, error);
+				console.log('handleUserSignup_3', error);
 			});
 	} catch (error) {
-		console.log(4, error);
+		console.log('handleUserSignup_4', error);
 	} finally {
 		setLoading(false);
 	}
@@ -124,7 +124,7 @@ async function handleForgetPassword(email, setLoading, setMessage) {
 		.catch((error) => {
 			setLoading(false);
 			setMessage(error.code);
-			console.log(error.code);
+			console.log('handleForgetPassword', error.code);
 		});
 }
 
@@ -134,7 +134,7 @@ async function handleSignOut() {
 			AsyncStorage.clear();
 		})
 		.catch((err) => {
-			console.log(err.code);
+			console.log('handleSignOut', err.code);
 		});
 }
 

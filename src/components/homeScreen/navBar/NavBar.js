@@ -3,9 +3,9 @@ import { View, Text, SafeAreaView, Image } from 'react-native';
 
 import { NavBarStyle } from './NavBarStyle';
 
-import { Appbar, Avatar, IconButton, Button } from 'react-native-paper';
+import { Appbar, Avatar, Button } from 'react-native-paper';
 
-function NavBar() {
+function NavBar({ addNotes }) {
 	return (
 		<Appbar style={NavBarStyle.NavBar}>
 			<View style={NavBarStyle.brandSection}>
@@ -23,7 +23,7 @@ function NavBar() {
 				compact
 				maxFontSizeMultiplier={1}
 				uppercase
-				onPress={() => console.log('Pressed')}
+				onPress={addNotes}
 			>
 				Add Notes
 			</Button>

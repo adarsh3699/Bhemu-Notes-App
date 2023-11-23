@@ -14,17 +14,6 @@
 		"no-mixed-spaces-and-tabs": "off",
 		"react-native/no-unused-styles": 2,
 		"react-native/split-platform-components": 2,
-		// "react-native/no-inline-styles": 1,
-		// "react-native/no-color-literals": 1,
-		"react-native/no-raw-text": 2,
-		// "eslint-disable-next-line": false,
-		"react-native/sort-styles": [
-			"error",
-			"asc",
-			{
-				"ignoreClassNames": false,
-				"ignoreStyleProperties": false
-			}
-		]
+		"react/no-unescaped-entities": "off"
 	}
 }

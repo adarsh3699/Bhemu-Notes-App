@@ -3,15 +3,17 @@ import { NoteListBoxStyle } from './NoteListBoxStyle';
 
 import { View, Text, TouchableOpacity } from 'react-native';
 
-const NoteListBox = ({ notesTitle, noteData, updatedOn, handleNoteOpening }) => {
-	// console.log(updatedOn);
+const NoteListBox = ({ index, openedNote, handleNoteOpening }) => {
+	const { notesTitle, noteData, updatedOn } = openedNote;
+
 	return (
-		<TouchableOpacity style={NoteListBoxStyle.noteBox} activeOpacity={1} onPress={handleNoteOpening}>
+		<TouchableOpacity
+			style={NoteListBoxStyle.noteBox}
+			activeOpacity={1}
+			onPress={() => handleNoteOpening(index, openedNote)}
+		>
 			<Text style={NoteListBoxStyle.noteTitle}>{notesTitle}</Text>
 			<View style={NoteListBoxStyle.noteContent}>
-				{/* <Text style={NoteListBoxStyle.noteContentText}>{'\u25CF Item 1'}</Text>
-				<Text style={NoteListBoxStyle.noteContentText}>{'\u25CF Item 1'}</Text> */}
-
 				{noteData.length <= 2 && noteData[0]?.element === '' ? (
 					<Text style={NoteListBoxStyle.noteContentText}>Empty.......</Text>
 				) : (
@@ -20,15 +22,11 @@ const NoteListBox = ({ notesTitle, noteData, updatedOn, handleNoteOpening }) => 
 							style={NoteListBoxStyle.noteContentText}
 							numberOfLines={noteData[0]?.type === 'note' ? 2 : 1}
 						>
-							{noteData[0]?.type === 'todo'
-								? '\u25CF Item 1' + noteData[0]?.element
-								: noteData[0]?.element}
+							{noteData[0]?.type === 'todo' ? '\u25CF ' + noteData[0]?.element : noteData[0]?.element}
 						</Text>
 
 						<Text style={NoteListBoxStyle.noteContentText} numberOfLines={1}>
-							{noteData[1]?.type === 'todo'
-								? '\u25CF Item 1' + noteData[1]?.element
-								: noteData[1]?.element}
+							{noteData[1]?.type === 'todo' ? '\u25CF ' + noteData[1]?.element : noteData[1]?.element}
 						</Text>
 					</>
 				)}

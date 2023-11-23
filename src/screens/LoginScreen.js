@@ -4,8 +4,7 @@ import { handleLoginForm } from '../firebase/auth';
 
 import { Text, View, ScrollView, KeyboardAvoidingView, Image, TextInput, TouchableOpacity } from 'react-native';
 
-import Checkbox from 'expo-checkbox';
-import { Button, HelperText } from 'react-native-paper';
+import { Button, Checkbox, HelperText } from 'react-native-paper';
 
 function LoginScreen({ navigation }) {
 	const [email, setEmail] = useState('');
@@ -19,7 +18,7 @@ function LoginScreen({ navigation }) {
 	}, [email, password]);
 
 	return (
-		<KeyboardAvoidingView style={login.background} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+		<KeyboardAvoidingView style={login.background}>
 			<View>
 				<ScrollView contentContainerStyle={login.wrapper} keyboardShouldPersistTaps="always">
 					<Image source={require('../../assets/myLogoM.png')} style={login.brandLogo} />
@@ -30,6 +29,7 @@ function LoginScreen({ navigation }) {
 						keyboardType="email-address"
 						autoComplete="email"
 						autoCapitalize="none"
+						cursorColor="#f0853d"
 						value={email}
 						onChangeText={(text) => {
 							setEmail(text) & (message ? setMessage('') : null);
@@ -44,12 +44,13 @@ function LoginScreen({ navigation }) {
 						autoCapitalize="none"
 						contextMenuHidden={true}
 						autoComplete="current-password"
+						cursorColor="#f0853d"
 						keyboardType={ispasswordVisible ? 'visible-password' : null}
 						value={password}
 						onChangeText={(text) => setPassword(text) & (message ? setMessage('') : null)}
 					/>
 					<View style={login.showPassword} onTouchStart={() => setIspasswordVisible(!ispasswordVisible)}>
-						<Checkbox value={ispasswordVisible} />
+						<Checkbox status={ispasswordVisible ? 'checked' : 'unchecked'} onPress={() => {}} />
 						<Text style={{ color: 'white', marginLeft: 10 }}>Show Password</Text>
 					</View>
 

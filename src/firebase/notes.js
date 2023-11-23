@@ -21,59 +21,60 @@ import {
 // collection ref
 const colRef = collection(database, 'user_notes');
 
-function getUserAllNoteData(setAllNotes, setIsFetchNotLoading, setMsg, netInfo) {
+function getUserAllNoteData(setAllNotes, setIsFetchNotLoading, handleMsgShown, netInfo) {
 	let userId = auth?.currentUser?.uid;
 	if (!userId) {
 		console.log('getUserAllNoteData:- Please Provide userId');
-		return setMsg('Please Provide all details');
+		return handleMsgShown('Please Provide all details');
 	} else if (!netInfo.isConnected) {
 		console.log('getUserAllNoteData:- Please check your internet connection');
-		return setMsg('Please check your internet connection');
+		// setIsFetchNotLoading(false);
+		return handleMsgShown('Please check your internet connection');
 	}
 
 	const getDataQuery = query(colRef, where('userId', '==', userId), orderBy('updatedOn', 'desc')); // orderBy('name', 'desc || ase')
 	setIsFetchNotLoading(true);
 	onSnapshot(
 		colRef,
-		async (realSnapshot) => {
+		async () => {
 			await getDocs(getDataQuery)
 				.then(async (snapshot) => {
-					let noteData = [];
+					let allNoteData = [];
 					snapshot.docs.forEach((doc) => {
-						noteData.push({
-							notesId: doc.id,
-							notesTitle: decryptText(doc.data().notesTitle),
-							noteData: JSON.parse(decryptText(doc.data().noteData)),
-							updatedOn: doc.data().updatedOn,
-							noteSharedUsers: doc.data().noteSharedUsers || [],
-							isNoteSharedWithAll: doc.data().isNoteSharedWithAll,
+						allNoteData.push({
+							noteId: doc.id,
+							notesTitle: decryptText(doc.data()?.notesTitle),
+							noteData: JSON.parse(decryptText(doc?.data()?.noteData)),
+							updatedOn: doc.data()?.updatedOn,
+							noteSharedUsers: doc.data()?.noteSharedUsers || [],
+							isNoteSharedWithAll: doc.data()?.isNoteSharedWithAll,
 						});
 					});
-					setAllNotes(noteData);
-					const encryptNotesData = JSON.stringify(noteData);
+					setAllNotes(allNoteData);
+					const encryptNotesData = JSON.stringify(allNoteData);
 					await AsyncStorage.setItem('note_data', encryptNotesData);
 					setIsFetchNotLoading(false);
 				})
 				.catch((err) => {
 					setIsFetchNotLoading(false);
-					console.log(1, err.message);
-					setMsg(err.code);
+					console.log('getUserAllNoteData_1', err);
+					handleMsgShown(err.message);
 				});
 		},
 		(err) => {
 			setIsFetchNotLoading(false);
-			console.log(2, err);
-			setMsg(err.code);
+			console.log('getUserAllNoteData_2', err);
+			handleMsgShown(err.message);
 		}
 	);
 }
 
 //Add Notes
-function addNewNote(upcomingData, setMyNotesId, setMsg, setIsApiLoading) {
+function addNewNote(upcomingData, setOpenedtNoteId, setMsg, setIsApiLoading) {
 	const userId = auth?.currentUser?.uid;
-	const { newNotesTitle, newNoteData } = upcomingData;
-	const encryptTitle = encryptText(newNotesTitle ? newNotesTitle?.trim() : newNotesTitle);
-	const stringifyedNoteData = JSON.stringify(newNoteData);
+	const { notesTitle, noteData } = upcomingData;
+	const encryptTitle = encryptText(notesTitle ? notesTitle?.trim() : notesTitle);
+	const stringifyedNoteData = JSON.stringify(noteData);
 	const encryptNoteData = encryptText(stringifyedNoteData);
 
 	if (!userId) {
@@ -89,13 +90,13 @@ function addNewNote(upcomingData, setMyNotesId, setMsg, setIsApiLoading) {
 		updatedOn: serverTimestamp(),
 	})
 		.then((e) => {
-			setMyNotesId(e?.id);
+			setOpenedtNoteId(e?.id);
 			setIsApiLoading(false);
 		})
 		.catch((err) => {
 			setIsApiLoading(false);
 			setMsg(err.code);
-			console.log(err);
+			console.log('addNewNote', err);
 		});
 }
 

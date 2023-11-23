@@ -5,7 +5,6 @@ const encryptionKey = 'bhemu_is_kutta';
 function encryptText(text) {
 	try {
 		const encryptedValue = AES.encrypt(text, encryptionKey).toString();
-		console.log('encryptedValue', encryptedValue);
 		return encryptedValue;
 	} catch (err) {
 		console.log('encryptText', err);

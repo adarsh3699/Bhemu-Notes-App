@@ -37,6 +37,7 @@ function LoginScreen({ navigation }) {
 						autoComplete="name"
 						autoCorrect={false}
 						inputMode="text"
+						cursorColor="#f0853d"
 						value={fullName}
 						onChangeText={(text) => setFullName(text) & (message ? setMessage('') : null)}
 					/>
@@ -46,6 +47,7 @@ function LoginScreen({ navigation }) {
 						keyboardType="email-address"
 						autoComplete="email"
 						inputMode="email"
+						cursorColor="#f0853d"
 						value={email}
 						onChangeText={(text) => setEmail(text) & (message ? setMessage('') : null)}
 					/>
@@ -56,6 +58,7 @@ function LoginScreen({ navigation }) {
 						secureTextEntry={true}
 						autoCapitalize="none"
 						autoComplete="new-password"
+						cursorColor="#f0853d"
 						value={password}
 						onChangeText={(text) => setPassword(text) & (message ? setMessage('') : null)}
 					/>
@@ -65,6 +68,7 @@ function LoginScreen({ navigation }) {
 						secureTextEntry={true}
 						autoCapitalize="none"
 						autoComplete="new-password"
+						cursorColor="#f0853d"
 						value={confirmPassword}
 						onChangeText={(text) => setConfirmPassword(text) & (message ? setMessage('') : null)}
 					/>

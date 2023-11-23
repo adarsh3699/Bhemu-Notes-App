@@ -42,9 +42,11 @@ const login = StyleSheet.create({
 	},
 	showPassword: {
 		flexDirection: 'row',
-		marginBottom: 20,
+		marginBottom: 10,
+		marginTop: -10,
 		alignSelf: 'flex-start',
-		marginLeft: '7%',
+		alignItems: 'center',
+		marginLeft: '5%',
 		// backgroundColor: 'red',
 	},
 	loginBtn: {

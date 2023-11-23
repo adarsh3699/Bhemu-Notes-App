@@ -28,6 +28,7 @@ function ForgottenScreen({ navigation }) {
 						autoComplete="email"
 						autoCapitalize="none"
 						autoCorrect={false}
+						cursorColor="#f0853d"
 						value={email}
 						onChangeText={(text) => setEmail(text)}
 					/>
