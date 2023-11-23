@@ -16,7 +16,7 @@ function ForgottenScreen({ navigation }) {
 	}, [email, setMessage, setLoading]);
 
 	return (
-		<KeyboardAvoidingView style={forgotPass.background} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+		<KeyboardAvoidingView style={forgotPass.background}>
 			<View>
 				<ScrollView contentContainerStyle={forgotPass.wrapper} keyboardShouldPersistTaps="always">
 					<Text style={forgotPass.title}>Forgotten Password</Text>

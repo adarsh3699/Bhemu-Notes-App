@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { login, signup, forgotPass } from '../styles/authScreensStyle';
 import { handleUserSignup } from '../firebase/auth';
 
-import { Text, View, ScrollView, KeyboardAvoidingView, Image, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
 
 import { Button, HelperText } from 'react-native-paper';
 
@@ -26,7 +26,7 @@ function LoginScreen({ navigation }) {
 	}, [fullName, email, password, confirmPassword, setLoading, setMessage]);
 
 	return (
-		<KeyboardAvoidingView style={signup.background} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+		<KeyboardAvoidingView style={signup.background}>
 			<View>
 				<ScrollView contentContainerStyle={signup.wrapper} keyboardShouldPersistTaps="always">
 					<Text style={signup.title}>Signup</Text>

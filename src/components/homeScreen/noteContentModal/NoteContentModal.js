@@ -2,7 +2,7 @@ import React from 'react';
 
 import { NoteContentModalStyle } from './NoteContentModalStyle';
 
-import { View, Text, Modal, TextInput } from 'react-native';
+import { View, Modal, TextInput } from 'react-native';
 import { IconButton, ActivityIndicator, Checkbox } from 'react-native-paper';
 
 import NavBar from '../navBar/NavBar';

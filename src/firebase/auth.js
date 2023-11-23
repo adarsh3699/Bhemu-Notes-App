@@ -12,7 +12,7 @@ import {
 } from 'firebase/auth';
 
 import {
-	getDoc,
+	// getDoc,
 	setDoc,
 	// updateDoc,
 	doc,

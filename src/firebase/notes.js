@@ -1,7 +1,6 @@
 import { auth, database } from './firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { getAuth } from 'firebase/auth';
 import { encryptText, decryptText } from '../utils';
 
 import {
@@ -106,7 +105,7 @@ function deleteData(noteId, setIsApiLoading, setMsg) {
 	const docRef = doc(database, 'user_notes', noteId);
 	setIsApiLoading(true);
 	deleteDoc(docRef)
-		.then((e) => {
+		.then(() => {
 			setIsApiLoading(false);
 		})
 		.catch((err) => {
