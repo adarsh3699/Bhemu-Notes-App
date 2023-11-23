@@ -114,6 +114,12 @@ const forgotPass = StyleSheet.create({
 		textAlign: 'center',
 		marginBottom: 10,
 	},
+	message: {
+		alignSelf: 'center',
+		fontSize: 15,
+		marginTop: -20,
+		marginBottom: 20,
+	},
 	backToLoginPage: {
 		alignSelf: 'center',
 		marginTop: 20,
