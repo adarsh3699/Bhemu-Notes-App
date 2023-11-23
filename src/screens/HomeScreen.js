@@ -6,11 +6,13 @@ import { HomeScreenStyle } from '../styles/HomeScreenStyle';
 
 import NavBar from '../components/homeScreen/navBar/NavBar';
 import NoteListBox from '../components/homeScreen/noteListBox/NoteListBox';
+import NoteContentModal from '../components/homeScreen/noteContentModal/NoteContentModal';
 
 import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 let localStorageNotesData;
 try {
@@ -22,6 +24,7 @@ try {
 }
 
 const HomeScreen = ({ navigation }) => {
+	const netInfo = useNetInfo();
 	const [message, setMessage] = useState({ text: '', type: '' });
 	const [allNotes, setAllNotes] = useState(localStorageNotesData || []);
 
@@ -30,6 +33,8 @@ const HomeScreen = ({ navigation }) => {
 	const [notesTitle, setNotesTitle] = useState('');
 	const [openedNoteData, setOpenedNoteData] = useState([]);
 	const [noteSharedUsers, setNoteSharedUsers] = useState([]);
+
+	const [isNotesModalOpen, setIsNotesModalOpen] = useState(false);
 	const [isNoteSharedWithAll, setIsNoteSharedWithAll] = useState(false);
 
 	const [isFetchNotLoading, setIsFetchNotLoading] = useState(true);
@@ -47,9 +52,24 @@ const HomeScreen = ({ navigation }) => {
 
 	// fetch All noteData
 	useEffect(() => {
-		getUserAllNoteData(setAllNotes, setIsFetchNotLoading, handleMsgShown);
+		getUserAllNoteData(setAllNotes, setIsFetchNotLoading, handleMsgShown, netInfo);
 		// setIsPageLoaded(true);
-	}, [handleMsgShown]);
+	}, [handleMsgShown, netInfo]);
+
+	const handleNoteOpening = useCallback(
+		(index, noteId, title, data, shareWith, userPermission) => {
+			console.log('handleNoteOpening');
+			setIsNotesModalOpen(true);
+			// if (noteId) setMyNotesId(noteId);
+			// setNotesTitle(title);
+			// setOpenedNoteData(data);
+			// setIsNotesModalOpen(true);
+			// setNoteSharedUsers(shareWith || []);
+			// setIsNoteSharedWithAll(userPermission || false);
+			// setCurrentNoteIndex(index);
+		},
+		[setNotesTitle, setOpenedNoteData, setIsNotesModalOpen]
+	);
 
 	return (
 		<SafeAreaView style={{ backgroundColor: '#151515' }}>
@@ -72,16 +92,17 @@ const HomeScreen = ({ navigation }) => {
 				{isFetchNotLoading && <ActivityIndicator style={HomeScreenStyle.loader} animating={true} size={30} />}
 
 				{allNotes.map((note, index) => {
-					// console.log('note', note.updatedOn);
 					return (
 						<NoteListBox
 							key={index}
 							notesTitle={note.notesTitle}
 							noteData={note.noteData}
 							updatedOn={note.updatedOn}
+							handleNoteOpening={handleNoteOpening}
 						/>
 					);
 				})}
+				<NoteContentModal isNotesModalOpen={isNotesModalOpen} setIsNotesModalOpen={setIsNotesModalOpen} />
 
 				<TouchableOpacity onPress={handleSignOut}>
 					<Text>Logout</Text>

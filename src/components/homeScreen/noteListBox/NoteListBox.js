@@ -1,12 +1,12 @@
 import React from 'react';
 import { NoteListBoxStyle } from './NoteListBoxStyle';
 
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
-const NoteListBox = ({ notesTitle, noteData, updatedOn }) => {
+const NoteListBox = ({ notesTitle, noteData, updatedOn, handleNoteOpening }) => {
 	// console.log(updatedOn);
 	return (
-		<View style={NoteListBoxStyle.noteBox}>
+		<TouchableOpacity style={NoteListBoxStyle.noteBox} activeOpacity={1} onPress={handleNoteOpening}>
 			<Text style={NoteListBoxStyle.noteTitle}>{notesTitle}</Text>
 			<View style={NoteListBoxStyle.noteContent}>
 				{/* <Text style={NoteListBoxStyle.noteContentText}>{'\u25CF Item 1'}</Text>
@@ -61,7 +61,7 @@ const NoteListBox = ({ notesTitle, noteData, updatedOn }) => {
 						  })}
 				</Text>
 			</View>
-		</View>
+		</TouchableOpacity>
 	);
 };
 

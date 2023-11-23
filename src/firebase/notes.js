@@ -21,11 +21,14 @@ import {
 // collection ref
 const colRef = collection(database, 'user_notes');
 
-function getUserAllNoteData(setAllNotes, setIsFetchNotLoading, setMsg) {
+function getUserAllNoteData(setAllNotes, setIsFetchNotLoading, setMsg, netInfo) {
 	let userId = auth?.currentUser?.uid;
 	if (!userId) {
 		console.log('getUserAllNoteData:- Please Provide userId');
 		return setMsg('Please Provide all details');
+	} else if (!netInfo.isConnected) {
+		console.log('getUserAllNoteData:- Please check your internet connection');
+		return setMsg('Please check your internet connection');
 	}
 
 	const getDataQuery = query(colRef, where('userId', '==', userId), orderBy('updatedOn', 'desc')); // orderBy('name', 'desc || ase')
@@ -47,7 +50,6 @@ function getUserAllNoteData(setAllNotes, setIsFetchNotLoading, setMsg) {
 						});
 					});
 					setAllNotes(noteData);
-
 					const encryptNotesData = JSON.stringify(noteData);
 					await AsyncStorage.setItem('note_data', encryptNotesData);
 					setIsFetchNotLoading(false);
