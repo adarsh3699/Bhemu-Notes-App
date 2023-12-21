@@ -12,7 +12,8 @@ function NavBar({ addNotes }) {
 				<Avatar.Image
 					size={33}
 					style={NavBarStyle.menuIcon}
-					source={require('../../../../assets/MylogoBS.jpeg')}
+					source={require('../../../../assets/navbarLogo.png')}
+					onPress={() => console.log('Pressed')}
 				/>
 				<Text style={NavBarStyle.navbarTitle}>Bhemu Notes</Text>
 			</View>

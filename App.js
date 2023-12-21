@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 
 import { handleUserState } from './src/firebase/auth';
 
@@ -9,10 +9,10 @@ import HomeStack from './src/navigation/HomeStack';
 import { StatusBar } from 'expo-status-bar';
 import { PaperProvider, DefaultTheme } from 'react-native-paper';
 import { NavigationContainer, colorScheme } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
 
 const theme = {
 	...DefaultTheme,
@@ -57,7 +57,7 @@ export default function App() {
 				{user === 'loading' ? (
 					<View style={{ flex: 1, backgroundColor: '#242526', justifyContent: 'center' }}>
 						<Image
-							source={require('./assets/myLogoM.png')}
+							source={require('./assets/newLogoM.png')}
 							style={{ height: 100, aspectRatio: 1, alignSelf: 'center' }}
 						/>
 					</View>

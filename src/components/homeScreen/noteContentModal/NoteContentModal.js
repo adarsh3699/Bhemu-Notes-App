@@ -40,6 +40,7 @@ function NoteContentModal({ isNotesModalOpen, handleNoteClosing, openedNoteData,
 						{noteData.map((item, index) => {
 							return item?.type === 'note' ? (
 								<TextInput
+									key={item?.type + index}
 									style={NoteContentModalStyle.noteText}
 									cursorColor="#f0853d"
 									placeholderTextColor="#ffffff9a"
@@ -48,7 +49,7 @@ function NoteContentModal({ isNotesModalOpen, handleNoteClosing, openedNoteData,
 									value={item.element}
 								/>
 							) : (
-								<View style={NoteContentModalStyle.todoTextBox} key={index}>
+								<View style={NoteContentModalStyle.todoTextBox} key={item?.type + index}>
 									<Checkbox status={item.isDone ? 'checked' : 'unchecked'} />
 									<TextInput
 										style={NoteContentModalStyle.todoText}

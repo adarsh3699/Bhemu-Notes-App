@@ -20,6 +20,7 @@ const NavBarStyle = StyleSheet.create({
 	},
 	menuIcon: {
 		marginHorizontal: 10,
+		backgroundColor: 'white',
 	},
 	addNotesBtn: {
 		marginHorizontal: 7,

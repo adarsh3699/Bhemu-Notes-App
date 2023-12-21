@@ -21,7 +21,7 @@ function LoginScreen({ navigation }) {
 		<KeyboardAvoidingView style={login.background}>
 			<View>
 				<ScrollView contentContainerStyle={login.wrapper} keyboardShouldPersistTaps="always">
-					<Image source={require('../../assets/myLogoM.png')} style={login.brandLogo} />
+					<Image source={require('../../assets/app_icon.png')} style={login.brandLogo} />
 					<Text style={login.title}>Bhemu Notes</Text>
 					<TextInput
 						style={login.textInput}
