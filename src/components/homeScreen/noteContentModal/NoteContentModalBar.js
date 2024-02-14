@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { IconButton, ActivityIndicator } from 'react-native-paper';
 
-const NoteContentModalBar = ({ NoteContentModalStyle, handleNoteClosing, isSaveBtnLoading }) => {
+const NoteContentModalBar = ({ NoteContentModalStyle, handleNoteClosing, isSaveBtnLoading, handleSaveBtnClick }) => {
 	return (
 		<View style={NoteContentModalStyle.modalBar}>
 			<View style={{ flexDirection: 'row' }}>
@@ -20,7 +20,7 @@ const NoteContentModalBar = ({ NoteContentModalStyle, handleNoteClosing, isSaveB
 						// size={24}
 						iconColor="white"
 						// loading={true}
-						onPress={() => console.log('Pressed')}
+						onPress={handleSaveBtnClick}
 					/>
 				)}
 			</View>

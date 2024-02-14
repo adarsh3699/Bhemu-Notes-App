@@ -14,6 +14,7 @@ function NoteContentModal({
 	openedNoteData,
 	handleNoteTextChange,
 	isSaveBtnLoading,
+	handleSaveBtnClick,
 }) {
 	const { notesTitle, noteData } = openedNoteData;
 	// console.log(noteData);
@@ -31,6 +32,7 @@ function NoteContentModal({
 					NoteContentModalStyle={NoteContentModalStyle}
 					handleNoteClosing={handleNoteClosing}
 					isSaveBtnLoading={isSaveBtnLoading}
+					handleSaveBtnClick={handleSaveBtnClick}
 				/>
 
 				<ScrollView>

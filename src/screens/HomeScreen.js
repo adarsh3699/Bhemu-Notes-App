@@ -89,16 +89,16 @@ const HomeScreen = ({ navigation }) => {
 		setAddNoteBoxInput('');
 	}, [handleNoteOpening, handleMsgShown, addNoteBoxInput]);
 
-	//handle note or todo save
-	// const handleSaveBtnClick = useCallback(async () => {
-	// 	setIsSaveBtnLoading(true);
-	// 	const toSendData = {
-	// 		noteId: myNoteId,
-	// 		notesTitle: document.getElementById('titleTextBox')?.innerText,
-	// 		noteData: openedNoteData,
-	// 	};
-	// 	updateDocument(toSendData, setIsSaveBtnLoading, setIsNotesModalOpen, handleMsgShown);
-	// }, [handleMsgShown, myNoteId, openedNoteData]);
+	// handle note or todo save
+	const handleSaveBtnClick = useCallback(async () => {
+		setIsSaveBtnLoading(true);
+		const toSendData = {
+			noteId: openedNoteId,
+			notesTitle: openedNoteData?.notesTitle,
+			noteData: openedNoteData?.noteData,
+		};
+		updateDocument(toSendData, setIsSaveBtnLoading, setIsNotesModalOpen, handleMsgShown);
+	}, [handleMsgShown, openedNoteId, openedNoteData]);
 
 	const handleNoteTextChange = useCallback(
 		(index, e, isTitleChange) => {
@@ -153,7 +153,7 @@ const HomeScreen = ({ navigation }) => {
 						openedNoteData={openedNoteData}
 						isSaveBtnLoading={isSaveBtnLoading}
 						// toggleShareDialogBox={toggleShareDialogBox}
-						// handleSaveBtnClick={handleSaveBtnClick}
+						handleSaveBtnClick={handleSaveBtnClick}
 						// handleDeleteBtnClick={handleDeleteBtnClick}
 						handleNoteTextChange={handleNoteTextChange}
 						// handleCheckboxClick={handleCheckboxClick}
