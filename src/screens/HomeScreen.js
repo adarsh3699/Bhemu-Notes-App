@@ -100,6 +100,22 @@ const HomeScreen = ({ navigation }) => {
 	// 	updateDocument(toSendData, setIsSaveBtnLoading, setIsNotesModalOpen, handleMsgShown);
 	// }, [handleMsgShown, myNoteId, openedNoteData]);
 
+	const handleNoteTextChange = useCallback(
+		(index, e, isTitleChange) => {
+			if (isTitleChange) {
+				const temp = { ...openedNoteData, notesTitle: e };
+				setOpenedNoteData(temp);
+			} else {
+				const temp = openedNoteData?.noteData.map(function (item, i) {
+					return i === index ? { ...item, element: e } : item;
+				});
+				const newOpenedNoteData = { ...openedNoteData, noteData: temp };
+				setOpenedNoteData(newOpenedNoteData);
+			}
+		},
+		[openedNoteData]
+	);
+
 	return (
 		<SafeAreaView style={{ backgroundColor: '#151515' }}>
 			<ScrollView
@@ -139,7 +155,7 @@ const HomeScreen = ({ navigation }) => {
 						// toggleShareDialogBox={toggleShareDialogBox}
 						// handleSaveBtnClick={handleSaveBtnClick}
 						// handleDeleteBtnClick={handleDeleteBtnClick}
-						// handleNoteTextChange={handleNoteTextChange}
+						handleNoteTextChange={handleNoteTextChange}
 						// handleCheckboxClick={handleCheckboxClick}
 						// handleDeleteToDoBtnClick={handleDeleteToDoBtnClick}
 						// handleAddTodoBtn={handleAddTodoBtn}

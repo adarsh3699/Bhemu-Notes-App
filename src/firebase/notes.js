@@ -34,31 +34,23 @@ function getUserAllNoteData(setAllNotes, setIsFetchNotLoading, handleMsgShown, n
 	const getDataQuery = query(colRef, where('userId', '==', userId), orderBy('updatedOn', 'desc')); // orderBy('name', 'desc || ase')
 	setIsFetchNotLoading(true);
 	onSnapshot(
-		colRef,
-		async () => {
-			await getDocs(getDataQuery)
-				.then(async (snapshot) => {
-					let allNoteData = [];
-					snapshot.docs.forEach((doc) => {
-						allNoteData.push({
-							noteId: doc.id,
-							notesTitle: decryptText(doc.data()?.notesTitle),
-							noteData: JSON.parse(decryptText(doc?.data()?.noteData)),
-							updatedOn: doc.data()?.updatedOn,
-							noteSharedUsers: doc.data()?.noteSharedUsers || [],
-							isNoteSharedWithAll: doc.data()?.isNoteSharedWithAll,
-						});
-					});
-					setAllNotes(allNoteData);
-					const encryptNotesData = JSON.stringify(allNoteData);
-					await AsyncStorage.setItem('note_data', encryptNotesData);
-					setIsFetchNotLoading(false);
-				})
-				.catch((err) => {
-					setIsFetchNotLoading(false);
-					console.log('getUserAllNoteData_1', err);
-					handleMsgShown(err.message);
+		getDataQuery,
+		async (snapshot) => {
+			let allNoteData = [];
+			snapshot.docs.forEach((doc) => {
+				allNoteData.push({
+					noteId: doc.id,
+					notesTitle: decryptText(doc.data()?.notesTitle),
+					noteData: JSON.parse(decryptText(doc?.data()?.noteData)),
+					updatedOn: doc.data()?.updatedOn,
+					noteSharedUsers: doc.data()?.noteSharedUsers || [],
+					isNoteSharedWithAll: doc.data()?.isNoteSharedWithAll,
 				});
+			});
+			setAllNotes(allNoteData);
+			const encryptNotesData = JSON.stringify(allNoteData);
+			await AsyncStorage.setItem('note_data', encryptNotesData);
+			setIsFetchNotLoading(false);
 		},
 		(err) => {
 			setIsFetchNotLoading(false);

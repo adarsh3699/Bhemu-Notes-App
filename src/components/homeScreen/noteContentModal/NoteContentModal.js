@@ -8,7 +8,13 @@ import { IconButton, Checkbox } from 'react-native-paper';
 import NavBar from '../navBar/NavBar';
 import NoteContentModalBar from './NoteContentModalBar';
 
-function NoteContentModal({ isNotesModalOpen, handleNoteClosing, openedNoteData, isSaveBtnLoading }) {
+function NoteContentModal({
+	isNotesModalOpen,
+	handleNoteClosing,
+	openedNoteData,
+	handleNoteTextChange,
+	isSaveBtnLoading,
+}) {
 	const { notesTitle, noteData } = openedNoteData;
 	// console.log(noteData);
 	return (
@@ -36,6 +42,7 @@ function NoteContentModal({ isNotesModalOpen, handleNoteClosing, openedNoteData,
 							placeholderTextColor="#ffffff9a"
 							autoComplete="off"
 							value={notesTitle}
+							onChangeText={(e) => handleNoteTextChange(0, e, true)}
 						/>
 						{noteData.map((item, index) => {
 							return item?.type === 'note' ? (
@@ -46,6 +53,7 @@ function NoteContentModal({ isNotesModalOpen, handleNoteClosing, openedNoteData,
 									placeholderTextColor="#ffffff9a"
 									autoComplete="off"
 									multiline={true}
+									onChangeText={(e) => handleNoteTextChange(index, e)}
 									value={item.element}
 								/>
 							) : (
@@ -57,6 +65,7 @@ function NoteContentModal({ isNotesModalOpen, handleNoteClosing, openedNoteData,
 										placeholderTextColor="#ffffff9a"
 										autoComplete="off"
 										multiline={true}
+										onChangeText={(e) => handleNoteTextChange(index, e)}
 										value={item.element}
 									/>
 									<IconButton
