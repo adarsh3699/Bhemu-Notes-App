@@ -21,7 +21,7 @@ function LoginScreen({ navigation }) {
 		<KeyboardAvoidingView style={login.background}>
 			<View>
 				<ScrollView contentContainerStyle={login.wrapper} keyboardShouldPersistTaps="always">
-					<Image source={require('../../assets/app_icon.png')} style={login.brandLogo} />
+					<Image source={require('../../assets/navbarLogo.png')} style={login.brandLogo} />
 					<Text style={login.title}>Bhemu Notes</Text>
 					<TextInput
 						style={login.textInput}
@@ -43,9 +43,9 @@ function LoginScreen({ navigation }) {
 						secureTextEntry={!ispasswordVisible}
 						autoCapitalize="none"
 						contextMenuHidden={true}
-						autoComplete="current-password"
+						autoComplete="password"
 						cursorColor="#f0853d"
-						keyboardType={ispasswordVisible ? 'visible-password' : null}
+						// keyboardType={ispasswordVisible ? 'visible-password' : null}
 						value={password}
 						onChangeText={(text) => setPassword(text) & (message ? setMessage('') : null)}
 					/>
