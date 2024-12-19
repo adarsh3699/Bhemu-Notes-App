@@ -20,7 +20,6 @@ const HomeScreenStyle = StyleSheet.create({
 	textInput: {
 		backgroundColor: 'bisque',
 		borderRadius: 5,
-		height: 32,
 		marginHorizontal: 10,
 		marginVertical: 10,
 		paddingHorizontal: 7,
