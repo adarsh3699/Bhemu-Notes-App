@@ -27,6 +27,7 @@ const NoteListBoxStyle = StyleSheet.create({
 		fontSize: 14,
 		fontWeight: '400',
 		color: 'white',
+		lineHeight: 19,
 	},
 	noteDate: {
 		flexDirection: 'row',

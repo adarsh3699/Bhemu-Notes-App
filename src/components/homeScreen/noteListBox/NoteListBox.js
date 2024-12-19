@@ -4,7 +4,7 @@ import { NoteListBoxStyle } from './NoteListBoxStyle';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 const NoteListBox = ({ index, openedNote, handleNoteOpening }) => {
-	const { notesTitle, noteData, updatedOn } = openedNote;
+	const { noteTitle, noteText, updatedOn } = openedNote;
 
 	return (
 		<TouchableOpacity
@@ -12,24 +12,11 @@ const NoteListBox = ({ index, openedNote, handleNoteOpening }) => {
 			activeOpacity={1}
 			onPress={() => handleNoteOpening(index, openedNote)}
 		>
-			<Text style={NoteListBoxStyle.noteTitle}>{notesTitle}</Text>
+			<Text style={NoteListBoxStyle.noteTitle}>{noteTitle || 'Note Title'}</Text>
 			<View style={NoteListBoxStyle.noteContent}>
-				{noteData.length <= 2 && noteData[0]?.element === '' ? (
-					<Text style={NoteListBoxStyle.noteContentText}>Empty.......</Text>
-				) : (
-					<>
-						<Text
-							style={NoteListBoxStyle.noteContentText}
-							numberOfLines={noteData[0]?.type === 'note' ? 2 : 1}
-						>
-							{noteData[0]?.type === 'todo' ? '\u25CF ' + noteData[0]?.element : noteData[0]?.element}
-						</Text>
-
-						<Text style={NoteListBoxStyle.noteContentText} numberOfLines={1}>
-							{noteData[1]?.type === 'todo' ? '\u25CF ' + noteData[1]?.element : noteData[1]?.element}
-						</Text>
-					</>
-				)}
+				<Text style={NoteListBoxStyle.noteContentText}>
+					{noteText?.split(noteTitle)[1]?.trim() ? noteText?.split(noteTitle)[1]?.trim() : 'Empty.......'}
+				</Text>
 			</View>
 			<View style={NoteListBoxStyle.noteDate}>
 				<Text style={NoteListBoxStyle.noteDateText}>

@@ -22,39 +22,46 @@ const colRef = collection(database, 'user_notes');
 
 function getUserAllNoteData(setAllNotes, setIsFetchNotLoading, handleMsgShown, netInfo) {
 	let userId = auth?.currentUser?.uid;
+
 	if (!userId) {
 		console.log('getUserAllNoteData:- Please Provide userId');
 		return handleMsgShown('Please Provide all details');
-	} else if (!netInfo.isConnected) {
+	} else if (!netInfo.isConnected && netInfo.isConnected != null) {
 		console.log('getUserAllNoteData:- Please check your internet connection');
 		// setIsFetchNotLoading(false);
-		return handleMsgShown('Please check your internet connection');
+		// return handleMsgShown('Please check your internet connection');
 	}
 
 	const getDataQuery = query(colRef, where('userId', '==', userId), orderBy('updatedOn', 'desc')); // orderBy('name', 'desc || ase')
+
 	setIsFetchNotLoading(true);
 	onSnapshot(
 		getDataQuery,
 		async (snapshot) => {
 			let allNoteData = [];
-			snapshot.docs.forEach((doc) => {
+
+			snapshot.docs.forEach((doc, index) => {
 				allNoteData.push({
+					index,
 					noteId: doc.id,
-					notesTitle: decryptText(doc.data()?.notesTitle),
-					noteData: JSON.parse(decryptText(doc?.data()?.noteData)),
-					updatedOn: doc.data()?.updatedOn,
-					noteSharedUsers: doc.data()?.noteSharedUsers || [],
-					isNoteSharedWithAll: doc.data()?.isNoteSharedWithAll,
+					noteData: decryptText(doc.data().noteData),
+					noteText: decryptText(doc.data().noteText),
+					noteTitle: decryptText(doc.data().noteTitle),
+					isLocked: doc.data().isLocked,
+					updatedOn: doc.data().updatedOn,
+					noteSharedUsers: doc.data().noteSharedUsers || [],
+					isNoteSharedWithAll: doc.data().isNoteSharedWithAll,
 				});
 			});
 			setAllNotes(allNoteData);
+
 			const encryptNotesData = JSON.stringify(allNoteData);
 			await AsyncStorage.setItem('note_data', encryptNotesData);
 			setIsFetchNotLoading(false);
 		},
 		(err) => {
 			setIsFetchNotLoading(false);
-			console.log('getUserAllNoteData_2', err);
+			console.log('getUserAllNoteData', err);
 			handleMsgShown(err.message);
 		}
 	);
@@ -90,6 +97,35 @@ function addNewNote(upcomingData, setOpenedtNoteId, setMsg, setIsApiLoading) {
 			console.log('addNewNote', err);
 		});
 }
+
+// function addNewNote(upcomingData, setMsg, setIsApiLoading, isSharedNoteType) {
+// 	const userId = auth?.currentUser?.uid;
+// 	const { newNoteText, newNoteData } = toSendNoteData;
+// 	if (!userId || !newNoteText || !newNoteData) return setMsg('addNewNote: Please Provide all details');
+// 	setIsApiLoading(true);
+// 	const encryptNoteText = encryptText(newNoteText?.trim());
+// 	const encryptNoteData = encryptText(newNoteData);
+// 	const toAdd = {
+// 		userId,
+// 		noteTitle: encryptNoteText,
+// 		noteText: encryptNoteText,
+// 		noteData: encryptNoteData,
+// 		isNoteSharedWithAll: false,
+// 		createdAt: serverTimestamp(),
+// 		updatedOn: serverTimestamp(),
+// 	};
+// 	addDoc(colRef, toAdd)
+// 		.then((e) => {
+// 			if (isSharedNoteType) window.location.href = '/';
+// 		})
+// 		.catch((err) => {
+// 			setMsg(err.code);
+// 			console.log('addNewNote:', err);
+// 		})
+// 		.finally(() => {
+// 			setIsApiLoading(false);
+// 		});
+// }
 
 //delete Notes
 function deleteData(noteId, setIsApiLoading, setMsg) {

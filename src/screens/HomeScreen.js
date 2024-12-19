@@ -78,13 +78,13 @@ const HomeScreen = ({ navigation }) => {
 	}, [setIsNotesModalOpen, setOpenedNoteData]);
 
 	//add Note Function
-	const addNotes = useCallback(() => {
+	const handleAddNewNote = useCallback(() => {
 		setIsApiLoading(true);
-		const notesTitle = addNoteBoxInput ? addNoteBoxInput : 'Enter Notes Title';
-		const noteData = [{ element: '', type: 'note' }];
+		const newNoteText = addNoteBoxInput || 'Enter Notes Title';
+		const newNoteData = `<h1>${newNoteText}</h1><p><br></p><p><br></p><p><br></p>`;
 
-		const toSendNoteData = { notesTitle, noteData };
-		handleNoteOpening(0, toSendNoteData);
+		const toSendNoteData = { newNoteText, newNoteData };
+		handleNoteOpening(0, { noteText: newNoteText, noteData: newNoteData });
 		addNewNote(toSendNoteData, setOpenedtNoteId, handleMsgShown, setIsApiLoading);
 		setAddNoteBoxInput('');
 	}, [handleNoteOpening, handleMsgShown, addNoteBoxInput]);
@@ -123,14 +123,14 @@ const HomeScreen = ({ navigation }) => {
 				stickyHeaderIndices={[1]}
 				showsVerticalScrollIndicator={false}
 			>
-				<NavBar addNotes={addNotes} />
+				<NavBar handleAddNewNote={handleAddNewNote} />
 				<View style={HomeScreenStyle.textInputBox}>
 					<TextInput
 						style={HomeScreenStyle.textInput}
 						placeholder="Take a note..."
 						value={addNoteBoxInput}
 						onChangeText={(text) => setAddNoteBoxInput(text)}
-						onSubmitEditing={addNotes}
+						onSubmitEditing={handleAddNewNote}
 					/>
 				</View>
 				{isFetchNotLoading && <ActivityIndicator style={HomeScreenStyle.loader} animating={true} size={30} />}
